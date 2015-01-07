@@ -24,7 +24,7 @@ module SeedMigration
   def self.after_config
     if self.extend_native_migration_task
       # require_relative '../extra_tasks.rb' # require_relative only available Ruby 1.9.2+
-      require File.expand_path('../extra_tasks.rb', __FILE__)
+      require File.expand_path('../../extra_tasks.rb', __FILE__)
     end
   end
 
