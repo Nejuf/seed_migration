@@ -8,7 +8,7 @@ describe SeedMigration::Migrator do
       Rails::Generators.invoke("seed_migration", ["TestMigration#{i}", timestamp.strftime('%Y%m%d%H%M%S')])
     end
 
-    Rails.stub(env: ActiveSupport::StringInquirer.new("development"))
+    Rails.stub(:env => ActiveSupport::StringInquirer.new("development"))
   end
 
   after :each do
@@ -226,7 +226,7 @@ describe SeedMigration::Migrator do
 
     context 'non development environment' do
       before(:each) do
-        Rails.stub(env: ActiveSupport::StringInquirer.new("production"))
+        Rails.stub(:env => ActiveSupport::StringInquirer.new("production"))
         FileUtils.rm(SeedMigration::Migrator::SEEDS_FILE_PATH)
         SeedMigration::Migrator.run_new_migrations
       end

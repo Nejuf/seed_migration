@@ -21,7 +21,7 @@ module SeedMigration
       # Check if we already migrated this file
       klass = class_from_path
       version = @path.basename.to_s.split("_", 2).first
-      raise "#{klass} has already been migrated." if SeedMigration::DataMigration.where(version: version).first
+      raise "#{klass} has already been migrated." if SeedMigration::DataMigration.where(:version => version).first
 
       start_time = Time.now
       announce("#{klass}: migrating")
@@ -49,7 +49,7 @@ module SeedMigration
       version = @path.basename.to_s.split("_", 2).first
 
       # Get migration record
-      migration = SeedMigration::DataMigration.where(version: version).first
+      migration = SeedMigration::DataMigration.where(:version => version).first
 
       # Do not proceed without it!
       raise "#{klass} hasn't been migrated." if migration.nil?
